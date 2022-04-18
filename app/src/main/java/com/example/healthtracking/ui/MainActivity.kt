@@ -1,8 +1,8 @@
-package com.example.healthtracking
+package com.example.healthtracking.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import com.example.healthtracking.R
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import com.example.healthtracking.db.RunDao

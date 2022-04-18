@@ -7,12 +7,19 @@ import com.example.healthtracking.other.Constants.RUNNING_DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.internal.managers.ApplicationComponentManager
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Inject
 import javax.inject.Singleton
 
+
+// Constructor-injected, because Hilt needs to know how to
+// provide instances of AnalyticsServiceImpl, too.
+
 @Module
-@InstallIn(ApplicationComponentManager::class)
+@InstallIn(ActivityComponent::class)
 object AppModule {
 
     @Singleton
