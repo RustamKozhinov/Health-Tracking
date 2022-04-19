@@ -37,6 +37,7 @@ class TrackingFragment : Fragment() {
             sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
         }
 
+        //the map's lifecycle
         mapView.onCreate(savedInstanceState)
 
         //setup map

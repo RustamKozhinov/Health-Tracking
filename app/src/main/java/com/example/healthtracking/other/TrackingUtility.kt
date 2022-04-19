@@ -10,8 +10,9 @@ import pub.devrel.easypermissions.EasyPermissions
  */
 object TrackingUtility {
 
+    //get permissions to access the location
     fun hasLocationPermissions(context: Context) =
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             EasyPermissions.hasPermissions(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION,
