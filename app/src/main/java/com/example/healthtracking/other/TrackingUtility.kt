@@ -5,6 +5,9 @@ import android.content.Context
 import android.os.Build
 import pub.devrel.easypermissions.EasyPermissions
 
+/*
+* request location permissions
+ */
 object TrackingUtility {
 
     fun hasLocationPermissions(context: Context) =
