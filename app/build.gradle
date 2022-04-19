@@ -27,6 +27,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        dataBinding true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -42,7 +47,7 @@ android {
 
 dependencies {
 //    implementation fileTree(dir: 'libs', include: ['*.jar'])
-//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.30"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
@@ -53,7 +58,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation("androidx.core:core-ktx:1.7.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.10")
+//    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.10")
     // Room
     implementation "androidx.room:room-runtime:2.4.2"
     annotationProcessor "androidx.room:room-compiler:2.4.2"
