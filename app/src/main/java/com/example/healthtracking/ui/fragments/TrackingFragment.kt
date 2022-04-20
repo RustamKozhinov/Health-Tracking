@@ -18,6 +18,7 @@ import com.example.healthtracking.other.Constants.POLYLINE_COLOR
 import com.example.healthtracking.other.Constants.POLYLINE_WIDTH
 import com.example.healthtracking.other.Constants.MAP_ZOOM
 import com.example.healthtracking.other.Constants.ACTION_PAUSE_SERVICE
+import com.example.healthtracking.other.TrackingUtility
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.example.healthtracking.services.Polyline
 
@@ -41,6 +42,9 @@ class TrackingFragment : Fragment() {
 
     //variable map
     private var map: GoogleMap? = null
+
+    //stop watch
+    private var curTimeInMillis = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,6 +82,13 @@ class TrackingFragment : Fragment() {
             pathPoints = it
             addLatestPolyline()
             moveCameraToUser()
+        })
+
+        //implented the stop watch
+        TrackingService.timeRunInMillis.observe(viewLifecycleOwner, Observer {
+            curTimeInMillis = it
+            val formattedTime = TrackingUtility.getFormattedStopWatchTime(curTimeInMillis, true)
+            tvTimer.text = formattedTime
         })
     }
 
