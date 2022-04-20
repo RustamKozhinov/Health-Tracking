@@ -80,10 +80,12 @@ class TrackingService : LifecycleService() {
                         isFirstRun = false
                     } else {
                         Timber.d("Resuming service...")
+                        startForegroundService()
                     }
                 }
                 ACTION_PAUSE_SERVICE -> {
                     Timber.d("Paused service")
+                    pauseService()
                 }
                 ACTION_STOP_SERVICE -> {
                     Timber.d("Stopped service")
@@ -138,6 +140,11 @@ class TrackingService : LifecycleService() {
                 pathPoints.postValue(this)
             }
         }
+    }
+
+    //drawing the running track on the map
+    private fun pauseService() {
+        isTracking.postValue(false)
     }
 
     //tracking user location in the background
