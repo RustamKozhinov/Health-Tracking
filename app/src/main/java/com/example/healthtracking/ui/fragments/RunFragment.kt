@@ -9,13 +9,17 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.example.healthtracking.adapters.RunAdapter
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthtracking.R
 import com.example.healthtracking.databinding.FragmentRunBinding
 import com.example.healthtracking.other.Constants
 import com.example.healthtracking.other.TrackingUtility
 import com.example.healthtracking.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_run.*
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 
@@ -24,20 +28,41 @@ class RunFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private val viewModel: MainViewModel by viewModels()
 
+    private lateinit var runAdapter: RunAdapter
+
+    private val binding: FragmentRunBinding? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val binding: FragmentRunBinding =
             DataBindingUtil.inflate(
                 inflater, R.layout.fragment_run, container, false
             )
+        return binding.root
+    }
 
-        binding.fab.setOnClickListener {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requestPermissions()
+        setupRecyclerView()
+
+        //showing runs in the recyclerView
+        viewModel.runsSortedByDate.observe(viewLifecycleOwner, Observer {
+            runAdapter.submitList(it)
+        })
+
+        binding?.fab?.setOnClickListener {
             findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
         }
-        return binding.root
+    }
+
+    //showing runs in the recyclerView
+    private fun setupRecyclerView() = rvRuns.apply {
+        runAdapter = RunAdapter()
+        adapter = runAdapter
+        layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun requestPermissions() {
