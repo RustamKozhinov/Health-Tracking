@@ -29,6 +29,7 @@ import com.example.healthtracking.db.Run
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import javax.inject.Inject
 
 
 /*
@@ -52,7 +53,8 @@ class TrackingFragment : Fragment() {
 
     private var menu: Menu? = null
 
-    private var weight = 80f
+    @set:Inject
+    var weight = 80f
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
