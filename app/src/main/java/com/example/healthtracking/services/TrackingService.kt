@@ -51,6 +51,7 @@ typealias Polylines = MutableList<Polyline>
 class TrackingService : LifecycleService() {
 
     var isFirstRun = true
+    var serviceKilled = false
 
     @Inject
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -96,6 +97,16 @@ class TrackingService : LifecycleService() {
         })
     }
 
+    //stopwatch stop kill service
+    private fun killService() {
+        serviceKilled = true
+        isFirstRun = true
+        pauseService()
+        postInitialValues()
+        stopForeground(true)
+        stopSelf()
+    }
+
     //method to start over the actions that were killed
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         intent?.let {
@@ -115,6 +126,7 @@ class TrackingService : LifecycleService() {
                 }
                 ACTION_STOP_SERVICE -> {
                     Timber.d("Stopped service")
+                    killService()
                 }
             }
         }
@@ -142,9 +154,12 @@ class TrackingService : LifecycleService() {
             isAccessible = true
             set(curNotificationBuilder, ArrayList<NotificationCompat.Action>())
         }
-        curNotificationBuilder = baseNotificationBuilder
-            .addAction(R.drawable.ic_pause_black_24dp, notificationActionText, pendingIntent)
-        notificationManager.notify(NOTIFICATION_ID, curNotificationBuilder.build())
+        if (!serviceKilled) {
+            curNotificationBuilder = baseNotificationBuilder
+                .addAction(R.drawable.ic_pause_black_24dp, notificationActionText, pendingIntent)
+            notificationManager.notify(NOTIFICATION_ID, curNotificationBuilder.build())
+        }
+
     }
 
     //tracking user location in the background
@@ -253,9 +268,12 @@ class TrackingService : LifecycleService() {
 
         //stop the timer using the button in the notification
         timeRunInSeconds.observe(this, Observer {
-            val notification = curNotificationBuilder
-                .setContentText(TrackingUtility.getFormattedStopWatchTime(it * 1000L))
-            notificationManager.notify(NOTIFICATION_ID, notification.build())
+            if (!serviceKilled) {
+                val notification = curNotificationBuilder
+                    .setContentText(TrackingUtility.getFormattedStopWatchTime(it * 1000L))
+                notificationManager.notify(NOTIFICATION_ID, notification.build())
+            }
+
         })
     }
 
