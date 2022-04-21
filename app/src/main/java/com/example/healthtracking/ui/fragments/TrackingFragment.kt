@@ -21,11 +21,14 @@ import com.example.healthtracking.other.Constants.ACTION_PAUSE_SERVICE
 import com.example.healthtracking.other.TrackingUtility
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.example.healthtracking.services.Polyline
-
-
+import com.google.android.gms.maps.model.LatLngBounds
+import kotlinx.android.synthetic.main.fragment_tracking.*
+import java.util.*
+import kotlin.math.round
+import com.example.healthtracking.db.Run
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.fragment_tracking.*
+import com.google.android.material.snackbar.Snackbar
 
 
 /*
@@ -49,6 +52,8 @@ class TrackingFragment : Fragment() {
 
     private var menu: Menu? = null
 
+    private var weight = 80f
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,6 +69,13 @@ class TrackingFragment : Fragment() {
         btnToggleRun.setOnClickListener {
             toggleRun()
         }
+
+        //stop run button
+        btnFinishRun.setOnClickListener {
+            zoomToSeeWholeTrack()
+            endRunAndSaveToDb()
+        }
+
         //setup map
         mapView.getMapAsync {
             map = it
@@ -153,6 +165,47 @@ class TrackingFragment : Fragment() {
             map?.addPolyline(polylineOptions)
         }
     }
+
+    //zoom out the map as much as possible to see the full mileage
+    private fun zoomToSeeWholeTrack() {
+        val bounds = LatLngBounds.Builder()
+        for(polyline in pathPoints) {
+            for(pos in polyline) {
+                bounds.include(pos)
+            }
+        }
+
+        map?.moveCamera(
+            CameraUpdateFactory.newLatLngBounds(
+                bounds.build(),
+                mapView.width,
+                mapView.height,
+                (mapView.height * 0.05f).toInt()
+            )
+        )
+    }
+
+
+    private fun endRunAndSaveToDb() {
+        map?.snapshot { bmp ->
+            var distanceInMeters = 0
+            for(polyline in pathPoints) {
+                distanceInMeters += TrackingUtility.calculatePolylineLength(polyline).toInt()
+            }
+            val avgSpeed = round((distanceInMeters / 1000f) / (curTimeInMillis / 1000f / 60 / 60) * 10) / 10f
+            val dateTimestamp = Calendar.getInstance().timeInMillis
+            val caloriesBurned = ((distanceInMeters / 1000f) * weight).toInt()
+            val run = Run(bmp, dateTimestamp, avgSpeed, distanceInMeters, curTimeInMillis, caloriesBurned)
+            viewModel.insertRun(run)
+            Snackbar.make(
+                requireActivity().findViewById(R.id.rootView),
+                "Run saved successfully",
+                Snackbar.LENGTH_LONG
+            ).show()
+            stopRun()
+        }
+    }
+
 
     /*
      *drawing the running track on the map
