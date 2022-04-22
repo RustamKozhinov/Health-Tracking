@@ -33,7 +33,7 @@ ___
 
 ### Health tracker allows users to save a history of their movements, see the indicators of calories burned, distance traveled, and the route itself
 
-<img src="https://user-images.githubusercontent.com/74183845/164648252-6b101d16-ffc4-478e-9ad2-f37d0901fed6.jpg" width="250"/> <img src="https://user-images.githubusercontent.com/74183845/164650183-5303eeb6-5a57-49d2-81bc-fc55b14490e3.jpg" width="250"/> <img src="https://user-images.githubusercontent.com/74183845/164648962-bcc81a2d-f522-4ac3-9493-00de81ed1bf9.jpg" width="250"/>
+<img src="https://user-images.githubusercontent.com/74183845/164822371-d6c4b162-7f7b-4f28-9094-9cd347637ac1.jpg" width="250"/> <img src="https://user-images.githubusercontent.com/74183845/164824464-0076ddb1-126e-4659-ad22-2a58c7c517d7.jpg" width="250"/> <img src="https://user-images.githubusercontent.com/74183845/164648962-bcc81a2d-f522-4ac3-9493-00de81ed1bf9.jpg" width="240"/>
 
 # Data input
 
@@ -43,8 +43,7 @@ ___
 ## System settings 
 ### when a user first enters our application, a pop-up window is displayed asking him to allow the use of the location
 
-<img src="https://user-images.githubusercontent.com/74183845/164648937-88e7de34-f44d-464e-8497-8891d4984cd6.jpg" width="250"/> <img src="https://user-images.githubusercontent.com/74183845/164648985-7974a00a-1aff-4a50-a658-183c42a4ef0c.jpg" width="255"/>
-
+<img src="https://user-images.githubusercontent.com/74183845/164826720-95d69bbd-2048-40a5-8ba7-513659d554bf.jpg" width="250"/> <img src="https://user-images.githubusercontent.com/74183845/164648985-7974a00a-1aff-4a50-a658-183c42a4ef0c.jpg" width="250"/>
 
 
 
