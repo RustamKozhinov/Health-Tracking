@@ -33,7 +33,7 @@ ___
 
 ### Health tracker allows users to save a history of their movements, see the indicators of calories burned, distance traveled, and the route itself
 
-<img src="https://user-images.githubusercontent.com/74183845/164822371-d6c4b162-7f7b-4f28-9094-9cd347637ac1.jpg" width="250"/> <img src="https://user-images.githubusercontent.com/74183845/164824464-0076ddb1-126e-4659-ad22-2a58c7c517d7.jpg" width="250"/> <img src="https://user-images.githubusercontent.com/74183845/164648962-bcc81a2d-f522-4ac3-9493-00de81ed1bf9.jpg" width="240"/>
+<img src="https://user-images.githubusercontent.com/74183845/164836440-43203e97-cdef-474e-97c3-58961cc74134.jpg" width="250"/> <img src="https://user-images.githubusercontent.com/74183845/164824464-0076ddb1-126e-4659-ad22-2a58c7c517d7.jpg" width="250"/> <img src="https://user-images.githubusercontent.com/74183845/164648962-bcc81a2d-f522-4ac3-9493-00de81ed1bf9.jpg" width="240"/>
 
 # Data input
 
