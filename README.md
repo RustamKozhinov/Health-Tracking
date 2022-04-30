@@ -21,8 +21,7 @@ ___
 + glide
 + MVVM
 + Coroutines
-+ Dagger 2
-+ Hilt
++ Dagger-Hilt
 + Timber
 + JUnit 4
 + Navigation Components
