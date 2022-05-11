@@ -23,7 +23,6 @@ ___
 + Coroutines
 + Dagger-Hilt
 + Timber
-+ JUnit 4
 + Navigation Components
 + Architectural Components
 
